@@ -48,6 +48,7 @@ const Register = () => {
    .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
+    console.log(user)
      fetch('http://localhost:3000/user',{
             method:'POST',
             headers:{
