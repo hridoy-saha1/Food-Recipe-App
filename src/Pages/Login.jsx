@@ -88,7 +88,7 @@ const Login = () => {
                 </form>
 
                 <button
-                    onClick={handleGoogleLogin} // ✅ Connect button
+                    onClick={handleGoogleLogin} 
                     className="w-full border border-gray-300 flex items-center mt-5 justify-center gap-2 text-gray-700 font-medium py-2 rounded-xl hover:bg-gray-100 transition"
                 >
                     <img

@@ -14,7 +14,7 @@ const MyRecipeCard = ({ recipe, onEdit, onDelete }) => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/recipes/${recipe._id}`, {
+                fetch(`https://recipe-database-server.vercel.app/recipes/${recipe._id}`, {
             method: 'DELETE',
         })
             .then((res) => res.json())

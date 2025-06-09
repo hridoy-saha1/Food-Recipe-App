@@ -9,7 +9,7 @@ const RecipeDetails = () => {
 
   const handleLike = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/recipes/${_id}/like`, {
+      const res = await fetch(`https://recipe-database-server.vercel.app/recipes/${_id}/like`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" }
       });

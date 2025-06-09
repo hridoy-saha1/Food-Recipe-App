@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
             index: true,
             path: "/",
             Component: Home,
-            loader: () => fetch('http://localhost:3000/top-recipes')
+            loader: () => fetch('https://recipe-database-server.vercel.app/top-recipes')
         },
         {
             path: "addrecipe",
@@ -39,12 +39,12 @@ export const router = createBrowserRouter([
         {
             path: "allRecipe",
             Component: AllRecipe,
-            loader: () => fetch('http://localhost:3000/recipes')
+            loader: () => fetch('https://recipe-database-server.vercel.app/recipes')
         },
         {
             path: "recipeDetails/:id",
             element: <PrivateRoute><RecipeDetails /></PrivateRoute>,
-            loader: ({ params }) => fetch(`http://localhost:3000/recipes/${params.id}`)
+            loader: ({ params }) => fetch(`https://recipe-database-server.vercel.app/recipes/${params.id}`)
         },
         {
             path: "/my-recipes",

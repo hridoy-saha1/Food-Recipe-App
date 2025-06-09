@@ -44,7 +44,7 @@ const AddRecipe = () => {
     };
 
     // Submit to server
-    fetch('http://localhost:3000/recipes', {
+    fetch('https://recipe-database-server.vercel.app/recipes', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
