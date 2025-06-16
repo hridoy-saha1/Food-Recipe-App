@@ -23,6 +23,8 @@ const RecipeDetails = () => {
   };
 
   return (
+    <>
+    <title>Recipe Details</title>
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-6">
       <img src={photo} alt={title} className="w-full h-64 object-cover rounded-xl mb-4" />
       <h2 className="text-3xl ml-72 font-bold text-emerald-600 mb-7">{title}</h2>
@@ -45,6 +47,8 @@ const RecipeDetails = () => {
         </button>
       </div>
     </div>
+    
+    </>
   );
 };
 

@@ -40,6 +40,8 @@ const MyRecipes = () => {
   };
 
   return (
+    <>
+    <title>My Recipe</title>
     <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {recipes.length > 0 ? (
         recipes.map((recipe) => (
@@ -66,6 +68,8 @@ const MyRecipes = () => {
         />
       )}
     </div>
+    
+    </>
   );
 };
 
