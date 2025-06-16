@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import { AuthContext } from "../Firebase/AuthProvider";
 import { Tooltip } from "react-tooltip";
+import photo from "../assets/photo/logo.jpg"
 
 const Navbar = () => {
   const [theme, setTheme] = useState(
@@ -50,9 +51,11 @@ const Navbar = () => {
     <nav className="bg-gradient-to-r from-lime-300 via-green-400 to-emerald-500 shadow-lg px-6 py-4 text-white">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
-        <NavLink to="/" className="text-2xl font-extrabold tracking-wide">
-          🍴 CraveCraft
-        </NavLink>
+       
+        <div  className="text-2xl flex w-10 h-10 gap-4 font-extrabold tracking-wide">
+         <img  src={photo} alt="" />
+           <p> CraveCraft</p>
+        </div>
 
         {/* Desktop Links */}
         <ul className="hidden lg:flex space-x-8 font-semibold">{links}</ul>
