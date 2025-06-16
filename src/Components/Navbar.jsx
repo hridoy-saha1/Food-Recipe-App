@@ -77,15 +77,15 @@ const Navbar = () => {
 
                         <div>
 
-                           <div className="h-10 w-10"  >
-                             <img
-                                src={user.photoURL}
-                                alt="avatar"
-                                className="w-10 h-10 rounded-full cursor-pointer ring-2 ring-white"
-                                data-tooltip-id="userTooltip"
-                                data-tooltip-place="bottom"
-                            />
-                           </div>
+                            <div className="h-10 w-10"  >
+                                <img
+                                    src={user.photoURL}
+                                    alt="avatar"
+                                    className="w-10 h-10 rounded-full cursor-pointer ring-2 ring-white"
+                                    data-tooltip-id="userTooltip"
+                                    data-tooltip-place="bottom"
+                                />
+                            </div>
                             <Tooltip id="userTooltip" clickable className="z-50 bg-white text-black px-4 py-2 rounded shadow-lg">
                                 <div className="text-center">
                                     <p className="font-semibold">{user.displayName || "No Name"}</p>
@@ -143,14 +143,21 @@ const Navbar = () => {
                 <ul className="lg:hidden bg-gradient-to-r from-lime-300 via-green-400 to-emerald-500 text-white px-6 py-4 space-y-4 font-semibold">
                     {links}
                     {user ? (
-                        <li className="flex flex-col gap-2">
-                            <span className="font-semibold">{user.displayName}</span>
-                            <button
-                                onClick={handleLogout}
-                                className="text-red-600 hover:underline"
-                            >
-                                Logout
-                            </button>
+                        <li className="flex items-center gap-4">
+                            <img
+                                src={user.photoURL}
+                                alt="avatar"
+                                className="w-10 h-10 rounded-full ring-2 ring-white"
+                            />
+                            <div className="flex flex-col">
+                                <span className="font-semibold">{user.displayName}</span>
+                                <button
+                                    onClick={handleLogout}
+                                    className="text-red-600 hover:underline mt-1"
+                                >
+                                    Logout
+                                </button>
+                            </div>
                         </li>
                     ) : (
                         <>
