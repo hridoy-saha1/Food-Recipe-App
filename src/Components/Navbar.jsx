@@ -50,19 +50,19 @@ const Navbar = () => {
   return (
     <nav className="bg-gradient-to-r from-lime-300 via-green-400 to-emerald-500 shadow-lg px-6 py-4 text-white">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo */}
+        
        
         <div  className="text-2xl flex w-10 h-10 gap-4 font-extrabold tracking-wide">
          <img  src={photo} alt="" />
            <p> CraveCraft</p>
         </div>
 
-        {/* Desktop Links */}
+       
         <ul className="hidden lg:flex space-x-8 font-semibold">{links}</ul>
 
-        {/* Right section - Theme, Avatar/Login */}
+       
         <div className="flex items-center gap-4">
-          {/* Theme Toggle */}
+        
           <input
             type="checkbox"
             value="dark"
@@ -71,7 +71,7 @@ const Navbar = () => {
             onChange={handleThemeChange}
           />
 
-          {/* Avatar or Login/Register */}
+          
           {user ? (
             <div>
               <div className="h-10 w-10">
@@ -116,7 +116,7 @@ const Navbar = () => {
             </>
           )}
 
-          {/* Mobile Toggle Button */}
+          
           <div className="lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -138,7 +138,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      
       {isMenuOpen && (
         <ul className="lg:hidden bg-gradient-to-r from-lime-300 via-green-400 to-emerald-500 text-white px-6 py-4 space-y-4 font-semibold">
           {links}
