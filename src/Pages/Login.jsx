@@ -53,7 +53,9 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-emerald-100 to-green-200 px-4">
+        <>
+        <title>LogIn</title>
+         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-emerald-100 to-green-200 px-4">
             <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-md">
                 <h2 className="text-3xl font-bold text-center text-emerald-700 mb-6">🔐 Login to RecipeBook</h2>
 
@@ -107,6 +109,8 @@ const Login = () => {
                 </p>
             </div>
         </div>
+        </>
+       
     );
 };
 

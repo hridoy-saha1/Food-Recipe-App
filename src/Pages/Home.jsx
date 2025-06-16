@@ -9,6 +9,9 @@ const Home = () => {
   const topRecipes = useLoaderData();
 
   return (
+
+   <>
+   <title>Home</title>
     <div className="container mx-auto px-4 py-6">
      
       <BannerSlider />
@@ -32,6 +35,7 @@ const Home = () => {
       {/* 💡 Extra Info Section */}
       <ExtraSections />
     </div>
+    </>
   );
 };
 

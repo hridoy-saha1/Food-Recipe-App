@@ -5,6 +5,8 @@ import photo from '../assets/astro.jpg'
 
 const Error = () => {
     return (
+       <>
+       <title>Error</title>
         <div>
              <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-green-50 to-green-100 dark:from-gray-800 dark:to-gray-900 text-gray-800 dark:text-gray-200 p-6">
       <div className="relative mb-8">
@@ -26,6 +28,7 @@ const Error = () => {
 
 
         </div>
+       </>
     );
 };
 

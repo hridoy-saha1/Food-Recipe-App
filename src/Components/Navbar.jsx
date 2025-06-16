@@ -1,12 +1,34 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import { AuthContext } from "../Firebase/AuthProvider";
-import ThemeToggleButton from "./ThemeToggleButton";
+
+import { Tooltip } from "react-tooltip";
 
 
 const Navbar = () => {
+
+    const [theme, setTheme] = useState(
+        localStorage.getItem("theme") === "light" ? "light" : "dark"
+    );
+
+    // Load theme from localStorage on component mount
+    useEffect(() => {
+        const savedTheme = localStorage.getItem("theme");
+        setTheme(savedTheme);
+        document.querySelector("html").setAttribute("data-theme", savedTheme);
+    }, [theme]);
+
+    // Toggle theme function
+    const handleThemeChange = (event) => {
+        const newTheme = event.target.checked ? "dark" : "light";
+        setTheme(newTheme);
+        localStorage.setItem("theme", newTheme);
+    };
+
+
     const { user, logOut } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 
     const handleLogout = () => {
         logOut().then(() => {
@@ -41,31 +63,40 @@ const Navbar = () => {
 
                 {/* Desktop Links */}
                 <ul className="hidden lg:flex space-x-8 font-semibold">{links}</ul>
+                <input
+                    type="checkbox"
+                    value="dark"
+                    className="toggle theme-controller mr-6"
+                    checked={theme === "dark"}
+                    onChange={handleThemeChange}
+                />
 
                 {/* User Avatar or Login/Register */}
                 <div className="hidden lg:flex items-center space-x-4">
                     {user ? (
-                        <div
-                            className="relative"
-                            onMouseEnter={() => setIsMenuOpen(true)}
-                        // onMouseLeave={() => setIsMenuOpen(false)}
-                        >
-                            <img
-                                src={user.photoURL || "https://i.ibb.co/ZYW3VTp/brown-brim.png"}
+
+                        <div>
+
+                           <div className="h-10 w-10"  >
+                             <img
+                                src={user.photoURL}
                                 alt="avatar"
                                 className="w-10 h-10 rounded-full cursor-pointer ring-2 ring-white"
+                                data-tooltip-id="userTooltip"
+                                data-tooltip-place="bottom"
                             />
-                            {isMenuOpen && (
-                                <div className="absolute right-0 top-12 bg-white text-gray-800 rounded shadow-lg w-48 p-3 z-50">
+                           </div>
+                            <Tooltip id="userTooltip" clickable className="z-50 bg-white text-black px-4 py-2 rounded shadow-lg">
+                                <div className="text-center">
                                     <p className="font-semibold">{user.displayName || "No Name"}</p>
                                     <button
                                         onClick={handleLogout}
-                                        className="mt-2 w-full text-left text-red-600 hover:underline"
+                                        className="mt-2 text-red-600 hover:underline"
                                     >
                                         Logout
                                     </button>
                                 </div>
-                            )}
+                            </Tooltip>
                         </div>
                     ) : (
                         <>
@@ -75,10 +106,7 @@ const Navbar = () => {
                             >
                                 Login
                             </NavLink>
-                            <div className="flex items-center gap-4">
-                                {/* other nav items */}
-                                <ThemeToggleButton />
-                            </div>
+
                             <NavLink
                                 to="/register"
                                 className="px-5 py-2 rounded-full font-semibold bg-white text-green-700 border-2 border-green-700 hover:bg-green-700 hover:text-white hover:scale-105 transition"

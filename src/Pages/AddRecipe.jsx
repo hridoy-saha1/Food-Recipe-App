@@ -75,6 +75,8 @@ const AddRecipe = () => {
   };
 
   return (
+   <>
+   <title>Add Recipe</title>
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
       <h2 className="text-3xl font-bold mb-8 text-green-700 text-center">Add a New Recipe</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -205,6 +207,7 @@ const AddRecipe = () => {
         </div>
       </form>
     </div>
+   </>
   );
 };
 
