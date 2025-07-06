@@ -49,7 +49,7 @@ const Register = () => {
     // Signed up 
     const user = userCredential.user;
     console.log(user)
-     fetch('https://recipe-database-server.vercel.app/user',{
+     fetch('http://localhost:3000/user',{
             method:'POST',
             headers:{
                 'content-type':'application/json'

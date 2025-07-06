@@ -4,7 +4,7 @@ A full-featured Recipe Book web application where users can discover, add, manag
 
 🔗 **Live Site**: [https://recipe-design-b4583.web.app/]  
 🛠 **Repo**:[https://github.com/Programming-Hero-Web-Course4/b11a10-client-side-hridoy8220]
-**server link**: [https://recipe-database-server.vercel.app/]
+**server link**: [http://localhost:3000/]
 **server repo**:[https://github.com/Programming-Hero-Web-Course4/b11a10-server-side-hridoy8220]
 
 ---

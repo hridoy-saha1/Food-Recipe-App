@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.8",
+    "@tanstack/react-query": "^5.81.5",
+    "axios": "^1.10.0",
     "firebase": "^11.9.0",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.513.0",

@@ -6,7 +6,7 @@ const BannerSlider = () => {
   const banners = [
     {
       id: 1,
-      title: "Delicious Bangladeshi Recipes",
+      title: "Delicious Bangladeshi Food",
       image: "https://i.ibb.co/h1sC4TFN/img81389-whqc-660x440q80.jpg",
     },
     {

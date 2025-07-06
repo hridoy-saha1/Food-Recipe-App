@@ -36,13 +36,16 @@ const Navbar = () => {
         <NavLink to="/" className="hover:text-lime-900 transition">Home</NavLink>
       </li>
       <li className="m-4">
-        <NavLink to="/allRecipe" className="hover:text-lime-900 transition">All Recipe</NavLink>
+        <NavLink to="/allRecipe" className="hover:text-lime-900 transition">Available Food</NavLink>
       </li>
       <li className="m-4">
-        <NavLink to="/addrecipe" className="hover:text-lime-900 transition">Add Recipe</NavLink>
+        <NavLink to="/addrecipe" className="hover:text-lime-900 transition">Add Food</NavLink>
       </li>
       <li className="m-4">
-        <NavLink to="/my-recipes" className="hover:text-lime-900 transition">My Recipe</NavLink>
+        <NavLink to="/my-recipes" className="hover:text-lime-900 transition">My Food</NavLink>
+      </li>
+      <li className="m-4">
+        <NavLink to="/food-request" >My Food Request</NavLink>
       </li>
     </>
   );
