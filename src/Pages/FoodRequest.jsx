@@ -8,7 +8,7 @@ const FoodRequest = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/my-requests?email=${user.email}`)
+      fetch(`https://food-request.vercel.app/my-requests?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           setRequests(data);

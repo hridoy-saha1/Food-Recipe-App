@@ -16,7 +16,7 @@ const UpdateModal = ({ recipe, onClose, onUpdated }) => {
 
         const { _id, ...dataToUpdate } = formData; // remove _id
 
-        fetch(`http://localhost:3000/Food/${_id}`, {
+        fetch(`https://food-request.vercel.app/Food/${_id}`, {
             method: 'PUT',
             headers: {
                 "content-type": "application/json"

@@ -49,7 +49,7 @@ const Register = () => {
     // Signed up 
     const user = userCredential.user;
     console.log(user)
-     fetch('http://localhost:3000/user',{
+     fetch('https://food-request.vercel.app/user',{
             method:'POST',
             headers:{
                 'content-type':'application/json'

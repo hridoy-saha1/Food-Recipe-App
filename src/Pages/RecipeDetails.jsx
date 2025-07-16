@@ -41,13 +41,13 @@ const RecipeDetails = () => {
     };
 
     try {
-      const res = await fetch('http://localhost:3000/requests', {
+      const res = await fetch('https://food-request.vercel.app/requests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestData),
       });
 
-      const updateRes = await fetch(`http://localhost:3000/Food/${_id}`, {
+      const updateRes = await fetch(`https://food-request.vercel.app/Food/${_id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: 'requested' }),
