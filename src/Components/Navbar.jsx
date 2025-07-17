@@ -36,10 +36,10 @@ const Navbar = () => {
         <NavLink to="/" className="hover:text-lime-900 transition">Home</NavLink>
       </li>
       <li className="m-4">
-        <NavLink to="/allRecipe" className="hover:text-lime-900 transition">Available Food</NavLink>
+        <NavLink to="/availableFood" className="hover:text-lime-900 transition">Available Food</NavLink>
       </li>
       <li className="m-4">
-        <NavLink to="/addrecipe" className="hover:text-lime-900 transition">Add Food</NavLink>
+        <NavLink to="/addFood" className="hover:text-lime-900 transition">Add Food</NavLink>
       </li>
       <li className="m-4">
         <NavLink to="/my-recipes" className="hover:text-lime-900 transition">My Food</NavLink>

@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
             loader: () => fetch('https://food-request.vercel.app/top-Food')
         },
         {
-            path: "addrecipe",
+            path: "addFood",
             element: (<PrivateRoute><AddRecipe></AddRecipe> </PrivateRoute>)
         },
         {
@@ -38,7 +38,7 @@ export const router = createBrowserRouter([
             Component: Register
         },
         {
-            path: "allRecipe",
+            path: "availableFood",
             Component: AllRecipe,
             loader: () => fetch('https://food-request.vercel.app/Food')
         },
