@@ -13,11 +13,6 @@ const RecipeDetails = () => {
     _id,
     foodName,
     foodImage,
-    ingredients,
-    instruction,
-    time,
-    cuisine,
-    categories,
     quantity,
     location,
     expireDate,
@@ -26,7 +21,7 @@ const RecipeDetails = () => {
   } = recipe;
 
   const handleRequest = async () => {
-    const token = localStorage.getItem('token'); // ✅ Get JWT token
+    const token = localStorage.getItem('token'); // ✅ JWT
 
     const requestData = {
       recipeId: _id,
@@ -43,34 +38,32 @@ const RecipeDetails = () => {
     };
 
     try {
-      // 🔐 Protected POST to /requests
       const res = await fetch('https://food-request.vercel.app/requests', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`, // ✅ JWT
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(requestData),
       });
 
-      // 🔐 Protected PATCH to update status
       const updateRes = await fetch(`https://food-request.vercel.app/Food/${_id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`, // ✅ JWT
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ status: 'requested' }),
       });
 
       if (res.ok && updateRes.ok) {
-        Swal.fire('Success', 'Recipe requested successfully!', 'success');
+        Swal.fire('Success', 'Food request sent successfully!', 'success');
         setShowModal(false);
       } else {
         throw new Error();
       }
     } catch (err) {
-      console.log(err)
+      console.error(err);
       Swal.fire('Error', 'Something went wrong.', 'error');
     }
   };
@@ -85,12 +78,9 @@ const RecipeDetails = () => {
         />
         <h2 className="text-3xl font-bold text-emerald-600 mb-4">{foodName}</h2>
 
-        <p className="text-gray-600 mb-2"><strong>Cuisine:</strong> {cuisine}</p>
-        <p className="text-gray-600 mb-2"><strong>Categories:</strong> {categories?.join(', ') || 'N/A'}</p>
-        <p className="text-gray-600 mb-2"><strong>Cook Time:</strong> {time} min</p>
         <p className="text-gray-600 mb-2"><strong>Quantity:</strong> {quantity}</p>
-        <p className="text-gray-600 mb-2"><strong>Ingredients:</strong> {ingredients}</p>
-        <p className="text-gray-800 mt-4 whitespace-pre-line">{instruction}</p>
+        <p className="text-gray-600 mb-2"><strong>Pickup Location:</strong> {location}</p>
+        <p className="text-gray-600 mb-2"><strong>Expires On:</strong> {new Date(expireDate).toLocaleString()}</p>
 
         <div className="mt-6 text-right">
           <button
@@ -110,13 +100,13 @@ const RecipeDetails = () => {
 
             <input readOnly value={foodName} className="input input-bordered w-full" />
             <img src={foodImage} alt="Food" className="w-full h-48 object-cover rounded" />
-            <input readOnly value={_id} className="input input-bordered w-full" />
-            <input readOnly value={donorEmail || 'N/A'} className="input input-bordered w-full" />
-            <input readOnly value={donorName || 'N/A'} className="input input-bordered w-full" />
-            <input readOnly value={user?.email || 'N/A'} className="input input-bordered w-full" />
-            <input readOnly value={new Date().toLocaleString()} className="input input-bordered w-full" />
-            <input readOnly value={location || 'N/A'} className="input input-bordered w-full" />
-            <input readOnly value={expireDate || 'N/A'} className="input input-bordered w-full" />
+            <input readOnly value={`Food ID: ${_id}`} className="input input-bordered w-full" />
+            <input readOnly value={`Donor: ${donorName || 'N/A'}`} className="input input-bordered w-full" />
+            <input readOnly value={`Donor Email: ${donorEmail || 'N/A'}`} className="input input-bordered w-full" />
+            <input readOnly value={`Your Email: ${user?.email || 'N/A'}`} className="input input-bordered w-full" />
+            <input readOnly value={`Pickup: ${location}`} className="input input-bordered w-full" />
+            <input readOnly value={`Expires: ${new Date(expireDate).toLocaleString()}`} className="input input-bordered w-full" />
+
             <textarea
               rows="3"
               placeholder="Additional Notes (optional)"
