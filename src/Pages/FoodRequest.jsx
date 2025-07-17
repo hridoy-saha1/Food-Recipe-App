@@ -5,20 +5,39 @@ const FoodRequest = () => {
   const { user } = useContext(AuthContext);
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`https://food-request.vercel.app/my-requests?email=${user.email}`)
-        .then((res) => res.json())
+      const token = localStorage.getItem('token');
+
+      fetch(`https://food-request.vercel.app/my-requests?email=${user.email}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // ✅ Include JWT in header
+        },
+      })
+        .then((res) => {
+          if (res.status === 401 || res.status === 403) {
+            throw new Error('Unauthorized access');
+          }
+          return res.json();
+        })
         .then((data) => {
           setRequests(data);
           setLoading(false);
         })
-        .catch(() => setLoading(false));
+        .catch((err) => {
+          console.error('Error fetching requests:', err);
+          setError(err.message);
+          setLoading(false);
+        });
     }
   }, [user]);
 
   if (loading) return <p className="text-center py-10">Loading...</p>;
+  if (error) return <p className="text-center py-10 text-red-500">{error}</p>;
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
@@ -57,7 +76,6 @@ const FoodRequest = () => {
                 {new Date(food.expireDate).toLocaleString()}
               </p>
 
-              {/* ✅ Show request date */}
               <p className="text-sm text-gray-600">
                 <strong>Requested:</strong>{' '}
                 {new Date(food.requestDate).toLocaleString()}

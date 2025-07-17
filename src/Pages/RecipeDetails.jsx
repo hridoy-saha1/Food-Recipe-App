@@ -26,6 +26,8 @@ const RecipeDetails = () => {
   } = recipe;
 
   const handleRequest = async () => {
+    const token = localStorage.getItem('token'); // ✅ Get JWT token
+
     const requestData = {
       recipeId: _id,
       foodName,
@@ -41,15 +43,23 @@ const RecipeDetails = () => {
     };
 
     try {
+      // 🔐 Protected POST to /requests
       const res = await fetch('https://food-request.vercel.app/requests', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // ✅ JWT
+        },
         body: JSON.stringify(requestData),
       });
 
+      // 🔐 Protected PATCH to update status
       const updateRes = await fetch(`https://food-request.vercel.app/Food/${_id}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // ✅ JWT
+        },
         body: JSON.stringify({ status: 'requested' }),
       });
 
@@ -74,21 +84,11 @@ const RecipeDetails = () => {
         />
         <h2 className="text-3xl font-bold text-emerald-600 mb-4">{foodName}</h2>
 
-        <p className="text-gray-600 mb-2">
-          <strong>Cuisine:</strong> {cuisine}
-        </p>
-        <p className="text-gray-600 mb-2">
-          <strong>Categories:</strong> {categories?.join(', ') || 'N/A'}
-        </p>
-        <p className="text-gray-600 mb-2">
-          <strong>Cook Time:</strong> {time} min
-        </p>
-        <p className="text-gray-600 mb-2">
-          <strong>Quantity:</strong> {quantity}
-        </p>
-        <p className="text-gray-600 mb-2">
-          <strong>Ingredients:</strong> {ingredients}
-        </p>
+        <p className="text-gray-600 mb-2"><strong>Cuisine:</strong> {cuisine}</p>
+        <p className="text-gray-600 mb-2"><strong>Categories:</strong> {categories?.join(', ') || 'N/A'}</p>
+        <p className="text-gray-600 mb-2"><strong>Cook Time:</strong> {time} min</p>
+        <p className="text-gray-600 mb-2"><strong>Quantity:</strong> {quantity}</p>
+        <p className="text-gray-600 mb-2"><strong>Ingredients:</strong> {ingredients}</p>
         <p className="text-gray-800 mt-4 whitespace-pre-line">{instruction}</p>
 
         <div className="mt-6 text-right">
@@ -105,28 +105,15 @@ const RecipeDetails = () => {
       {showModal && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg w-full max-w-md space-y-4 relative overflow-y-auto max-h-[90vh]">
-            <h3 className="text-xl font-bold text-center text-emerald-600">
-              Confirm Food Request
-            </h3>
+            <h3 className="text-xl font-bold text-center text-emerald-600">Confirm Food Request</h3>
 
             <input readOnly value={foodName} className="input input-bordered w-full" />
-
-            {/* ✅ Show image instead of link */}
-            <img
-              src={foodImage}
-              alt="Food"
-              className="w-full h-48 object-cover rounded"
-            />
-
+            <img src={foodImage} alt="Food" className="w-full h-48 object-cover rounded" />
             <input readOnly value={_id} className="input input-bordered w-full" />
             <input readOnly value={donorEmail || 'N/A'} className="input input-bordered w-full" />
             <input readOnly value={donorName || 'N/A'} className="input input-bordered w-full" />
             <input readOnly value={user?.email || 'N/A'} className="input input-bordered w-full" />
-            <input
-              readOnly
-              value={new Date().toLocaleString()}
-              className="input input-bordered w-full"
-            />
+            <input readOnly value={new Date().toLocaleString()} className="input input-bordered w-full" />
             <input readOnly value={location || 'N/A'} className="input input-bordered w-full" />
             <input readOnly value={expireDate || 'N/A'} className="input input-bordered w-full" />
             <textarea

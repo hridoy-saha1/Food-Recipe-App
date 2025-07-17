@@ -13,7 +13,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔐 Get JWT token from backend
+
   const fetchAndStoreJWT = async (email) => {
     try {
       const res = await fetch('https://food-request.vercel.app/jwt', {
@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
 
       const data = await res.json();
       if (data.token) {
-        localStorage.setItem('token', data.token); // store JWT
+        localStorage.setItem('token', data.token);
       }
     } catch (error) {
       console.error('JWT fetch error:', error);
@@ -32,29 +32,29 @@ const AuthProvider = ({ children }) => {
   };
 
   // ✅ Create new user
-  const createUser = (email, password) => {
+  const createUser = async (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password).then((res) => {
-    //   return fetchAndStoreJWT(email).then(() => res);
-    });
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+    await fetchAndStoreJWT(result.user.email); // Get token right after signup
+    return result;
   };
 
   // ✅ Log in existing user
-  const LogIn = (email, password) => {
+  const LogIn = async (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password).then((res) => {
-    //   return fetchAndStoreJWT(email).then(() => res);
-    });
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    await fetchAndStoreJWT(result.user.email); // Get token right after login
+    return result;
   };
 
   // ✅ Log out user
   const logOut = () => {
     setLoading(true);
-    localStorage.removeItem('token'); // Remove token on logout
+    localStorage.removeItem('token');
     return signOut(auth);
   };
 
-  // ✅ Auth state observer
+  // ✅ Observe auth state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -79,7 +79,11 @@ const AuthProvider = ({ children }) => {
     setLoading,
   };
 
-  return <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={userInfo}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

@@ -9,18 +9,28 @@ const MyRecipes = () => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
+  const token = localStorage.getItem('token'); // ✅ Get token
+
   useEffect(() => {
     if (user?.email) {
-      fetch(`https://food-request.vercel.app/my-Food?email=${user.email}`)
-        .then(res => res.json())
+      fetch(`https://food-request.vercel.app/my-Food?email=${user.email}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // ✅ Send token
+        },
+      })
+        .then(res => {
+          if (!res.ok) throw new Error('Unauthorized');
+          return res.json();
+        })
         .then(data => {
           setRecipes(data);
         })
         .catch(err => {
-          console.error("Failed to fetch recipes", err);
+          console.error("Failed to fetch recipes:", err);
         });
     }
-  }, [user]);
+  }, [user, token]);
 
   const handleEditClick = (recipe) => {
     setSelectedRecipe(recipe);
@@ -52,6 +62,10 @@ const MyRecipes = () => {
       if (result.isConfirmed) {
         fetch(`https://food-request.vercel.app/Food/${id}`, {
           method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, // ✅ Send token
+          },
         })
           .then((res) => res.json())
           .then((data) => {
@@ -74,7 +88,6 @@ const MyRecipes = () => {
             <tr className="bg-emerald-100 text-sm text-gray-700">
               <th className="py-3 px-4 border">Image</th>
               <th className="py-3 px-4 border">Food Name</th>
-            
               <th className="py-3 px-4 border">Location</th>
               <th className="py-3 px-4 border">Quantity</th>
               <th className="py-3 px-4 border">Expire Date</th>
@@ -93,7 +106,6 @@ const MyRecipes = () => {
                     />
                   </td>
                   <td className="py-2 px-4 border">{recipe.foodName}</td>
-                  
                   <td className="py-2 px-4 border">{recipe.location || '-'}</td>
                   <td className="py-2 px-4 border">{recipe.quantity || '-'}</td>
                   <td className="py-2 px-4 border">

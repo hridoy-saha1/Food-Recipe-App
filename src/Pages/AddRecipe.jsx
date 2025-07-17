@@ -5,10 +5,12 @@ import { AuthContext } from '../Firebase/AuthProvider';
 import { useMutation } from '@tanstack/react-query';
 
 const addFood = async (foodData) => {
+  const token=localStorage.getItem('token')
   const response = await fetch('https://food-request.vercel.app/Food', {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
+       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(foodData),
   });
