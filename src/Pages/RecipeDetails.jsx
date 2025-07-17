@@ -70,6 +70,7 @@ const RecipeDetails = () => {
         throw new Error();
       }
     } catch (err) {
+      console.log(err)
       Swal.fire('Error', 'Something went wrong.', 'error');
     }
   };
