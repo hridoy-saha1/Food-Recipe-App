@@ -37,6 +37,9 @@ const Navbar = () => {
       <li>
         <NavLink to="/availableFood" className="hover:text-lime-900 transition">Available Food</NavLink>
       </li>
+      <li>
+        <NavLink to="/menuContent" className="hover:text-lime-900 transition">MenuContent</NavLink>
+      </li>
 
       {user && (
         <>

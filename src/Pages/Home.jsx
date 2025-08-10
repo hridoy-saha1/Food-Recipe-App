@@ -7,6 +7,7 @@ import { Link } from 'react-router';
 import { motion } from 'framer-motion';
 import ReviewsSection from '../Components/ReviewsSection';
 
+
 // Framer Motion variants for animation
 const headingVariants = {
   hidden: { opacity: 0, scale: 0.8 },
@@ -47,70 +48,74 @@ const Home = () => {
   const topRecipes = useLoaderData();
 
   return (
-  <>
-    <title>Home</title>
-   
-    <div className="bg-gradient-to-r from-lime-50 via-green-50 to-emerald-50 min-h-screen">
-      <div className="container mx-auto px-4 py-6">
+    <>
+      <title>Home</title>
 
-       
-        <motion.div
-          initial={{ x: '-100vw' }}
-          animate={{ x: 0 }}
-          transition={{ type: 'spring', stiffness: 70, duration: 0.8 }}
-        >
-          <BannerSlider />
-        </motion.div>
+      <div className="bg-gradient-to-r from-lime-50 via-green-50 to-emerald-50 min-h-screen">
+        <div className="container mx-auto px-4 py-6">
 
-       
-        <motion.h1
-          className="text-4xl font-bold mb-10 text-center text-green-800"
-          variants={headingVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          ✨ Top Recipes of the Week ✨
-        </motion.h1>
 
-       
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {topRecipes.slice(0, 4).map((recipe) => (
-            <motion.div key={recipe._id} variants={itemVariants}>
-              <RecipeCard recipes={recipe} />
-            </motion.div>
-          ))}
-        </motion.div>
+          <motion.div
+            initial={{ x: '-100vw' }}
+            animate={{ x: 0 }}
+            transition={{ type: 'spring', stiffness: 70, duration: 0.8 }}
+          >
+            <BannerSlider />
+          </motion.div>
 
+
+          <motion.h1
+            className="text-4xl font-bold mb-10 text-center text-green-800"
+            variants={headingVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            ✨ Top Recipes of the Week ✨
+          </motion.h1>
+
+
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {topRecipes.slice(0, 4).map((recipe) => (
+              <motion.div key={recipe._id} variants={itemVariants}>
+                <RecipeCard recipes={recipe} />
+              </motion.div>
+            ))}
+          </motion.div>
+
+
+          <motion.div
+            className="text-center mb-8"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Link to="/allRecipe">
+              <motion.button
+                className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded-lg shadow-lg"
+                whileHover={{ boxShadow: '0px 8px 24px rgba(0,0,0,0.2)' }}
+                transition={{ duration: 0.3 }}
+              >
+                See All Recipes
+              </motion.button>
+            </Link>
+          </motion.div>
+
+
+          <ExtraSections />
         
-        <motion.div
-          className="text-center mb-8"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Link to="/allRecipe">
-            <motion.button
-              className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded-lg shadow-lg"
-              whileHover={{ boxShadow: '0px 8px 24px rgba(0,0,0,0.2)' }}
-              transition={{ duration: 0.3 }}
-            >
-              See All Recipes
-            </motion.button>
-          </Link>
-        </motion.div>
-
         
-        <ExtraSections />
+           
+        
 
-         <ReviewsSection></ReviewsSection>
+          <ReviewsSection></ReviewsSection>
+        </div>
       </div>
-    </div>
-  </>
-);
+    </>
+  );
 
 };
 
