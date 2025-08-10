@@ -13,7 +13,7 @@ const products = [
   {
     id: 2,
     name: "Almond organic",
-    img: "https://i.ibb.co/0n42B9h/almond.png",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd9Vgq6s8jgO29FVccXfu7jvAe0fZii2CvKw&s",
     priceRange: "$10.00 - $70.00",
     rating: 4,
     sold: 365,
@@ -22,7 +22,7 @@ const products = [
   {
     id: 3,
     name: "Fresh Fruit Sweet 1Kg",
-    img: "https://i.ibb.co/yfHgTCh/fruit.png",
+    img: "https://img.drz.lazcdn.com/static/bd/p/6969b9c3afac8e9ffb35ce6aa1d69744.jpg_720x720q80.jpg",
     priceRange: "$10.00 - $70.00",
     rating: 4,
     sold: 365,
@@ -30,8 +30,8 @@ const products = [
   },
   {
     id: 4,
-    name: "Organic coconut",
-    img: "https://i.ibb.co/9h6ZxZs/dried-apricots.png",
+    name: "Organic Orange",
+    img: "https://www.dccbazar.com.bd/images/thumbnails/992/991/detailed/5/Screenshot_2023-08-25-17-15-25-57_40deb401b9ffe8e1df2f1cc5ba480b12.jpg",
     priceRange: "$10.00 - $70.00",
     rating: 4,
     sold: 365,
@@ -39,8 +39,8 @@ const products = [
   },
   {
     id: 5,
-    name: "Almond organic",
-    img: "https://i.ibb.co/3Cd8VQv/tomato.png",
+    name: "Broccoli",
+    img: "https://static-01.daraz.com.bd/p/96cd8daa9917c02248bd9a7b0f3e079d.jpg",
     priceRange: "$10.00 - $70.00",
     rating: 4,
     sold: 365,
@@ -127,22 +127,7 @@ export default function SuperDeals() {
                 </span>
               </div>
 
-              <button className="mt-3 bg-green-700 text-white p-2 rounded-full hover:bg-green-800">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.4 5M17 13l1.4 5M6 21a1 1 0 100-2 1 1 0 000 2zm12 0a1 1 0 100-2 1 1 0 000 2z"
-                  />
-                </svg>
-              </button>
+              
             </div>
           );
         })}

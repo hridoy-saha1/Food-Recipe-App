@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SuperDeals from "../Components/SuperDeals";
+import { NavLink } from "react-router";
 
 const categories = [
   { id: 1, name: "Meats & Seafood", img: "https://media.istockphoto.com/id/1156027693/photo/fresh-salmon-steak-with-a-variety-of-seafood-and-herbs.jpg?s=612x612&w=0&k=20&c=FnY31V37yG5Ip4ejRttubUHBS8PPTaZfHHukDsEDjc0=" },
@@ -142,9 +143,9 @@ export default function MixyMainContent() {
           <h3 className="text-xl font-semibold">Free shipping on orders over $25!</h3>
           <p>Need help? Call Us: <a href="tel:+888554168" className="underline">+8 88 55 4168</a></p>
         </div>
-        <button className="bg-white text-green-700 px-6 py-3 rounded-md font-bold hover:bg-gray-200 transition">
+      <NavLink to="/menuContent" > <button  className="bg-white text-green-700 px-6 py-3 rounded-md font-bold hover:bg-gray-200 transition">
           Shop Now
-        </button>
+        </button></NavLink>
       </section>
     </div>
     </>
