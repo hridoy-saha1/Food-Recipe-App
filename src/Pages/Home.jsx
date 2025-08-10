@@ -46,8 +46,10 @@ const Home = () => {
   const topRecipes = useLoaderData();
 
   return (
-    <>
-      <title>Home</title>
+  <>
+    <title>Home</title>
+    {/* Full background color matching navbar */}
+    <div className="bg-gradient-to-r from-lime-50 via-green-50 to-emerald-50 min-h-screen">
       <div className="container mx-auto px-4 py-6">
 
         {/* Slide in Banner */}
@@ -61,7 +63,7 @@ const Home = () => {
 
         {/* Animated Heading */}
         <motion.h1
-          className="text-4xl font-bold mb-10 text-center text-blue-800"
+          className="text-4xl font-bold mb-10 text-center text-green-800"
           variants={headingVariants}
           initial="hidden"
           animate="visible"
@@ -69,7 +71,7 @@ const Home = () => {
           ✨ Top Recipes of the Week ✨
         </motion.h1>
 
-        {/* Animated Recipe Grid with Stagger */}
+        {/* Recipe Grid */}
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
           variants={containerVariants}
@@ -91,7 +93,7 @@ const Home = () => {
         >
           <Link to="/allRecipe">
             <motion.button
-              className="bg-gradient-to-r from-blue-500 to-green-500 text-white px-6 py-2 rounded-lg shadow-lg"
+              className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded-lg shadow-lg"
               whileHover={{ boxShadow: '0px 8px 24px rgba(0,0,0,0.2)' }}
               transition={{ duration: 0.3 }}
             >
@@ -103,8 +105,10 @@ const Home = () => {
         {/* Extra Sections */}
         <ExtraSections />
       </div>
-    </>
-  );
+    </div>
+  </>
+);
+
 };
 
 export default Home;

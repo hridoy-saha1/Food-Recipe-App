@@ -1,27 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink } from "react-router"; 
 import { AuthContext } from "../Firebase/AuthProvider";
 import { Tooltip } from "react-tooltip";
-import photo from "../assets/photo/logo.jpg"
+import photo from "../assets/photo/logo.jpg";
 
 const Navbar = () => {
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") === "light" ? "light" : "dark"
-  );
+  const { user, logOut } = useContext(AuthContext);
+
+  // Theme State
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    setTheme(savedTheme);
-    document.querySelector("html").setAttribute("data-theme", savedTheme);
+    document.querySelector("html").setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const handleThemeChange = (event) => {
-    const newTheme = event.target.checked ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
+  const handleThemeChange = (e) => {
+    setTheme(e.target.checked ? "dark" : "light");
   };
 
-  const { user, logOut } = useContext(AuthContext);
+  // Mobile menu state
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = () => {
@@ -30,62 +28,64 @@ const Navbar = () => {
     });
   };
 
+  // Navbar links based on login status
   const links = (
     <>
-      <li className="m-4">
+      <li>
         <NavLink to="/" className="hover:text-lime-900 transition">Home</NavLink>
       </li>
-      <li className="m-4">
+      <li>
         <NavLink to="/availableFood" className="hover:text-lime-900 transition">Available Food</NavLink>
       </li>
-      <li className="m-4">
-        <NavLink to="/addFood" className="hover:text-lime-900 transition">Add Food</NavLink>
-      </li>
-      <li className="m-4">
-        <NavLink to="/my-recipes" className="hover:text-lime-900 transition">My Food</NavLink>
-      </li>
-      <li className="m-4">
-        <NavLink to="/food-request" >My Food Request</NavLink>
-      </li>
+
+      {user && (
+        <>
+          <li>
+            <NavLink to="/addFood" className="hover:text-lime-900 transition">Add Food</NavLink>
+          </li>
+          <li>
+            <NavLink to="/my-recipes" className="hover:text-lime-900 transition">My Food</NavLink>
+          </li>
+          <li>
+            <NavLink to="/food-request" className="hover:text-lime-900 transition">My Food Request</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
   return (
-    <nav className="bg-gradient-to-r from-lime-300 via-green-400 to-emerald-500 shadow-lg px-6 py-4 text-white">
+    <nav className="bg-gradient-to-r from-lime-300 via-green-400 to-emerald-500 shadow-lg px-6 py-4 text-white sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        
-       
-        <div  className="text-2xl flex w-10 h-10 gap-4 font-extrabold tracking-wide">
-         <img  src={photo} alt="" />
-           <p> CraveCraft</p>
+
+        {/* Logo */}
+        <div className="flex items-center gap-3 font-extrabold text-xl tracking-wide">
+          <img src={photo} alt="logo" className="w-10 h-10 rounded-full" />
+          <p>CraveCraft</p>
         </div>
 
-       
+        {/* Desktop Menu */}
         <ul className="hidden lg:flex space-x-8 font-semibold">{links}</ul>
 
-       
+        {/* Right side items */}
         <div className="flex items-center gap-4">
-        
+          {/* Theme Switch */}
           <input
             type="checkbox"
-            value="dark"
             className="toggle theme-controller"
             checked={theme === "dark"}
             onChange={handleThemeChange}
           />
 
-          
+          {/* Auth Buttons / User Profile */}
           {user ? (
             <div>
-              <div className="h-10 w-10">
-                <img
-                  src={user.photoURL}
-                  alt="avatar"
-                  className="w-10 h-10 rounded-full cursor-pointer ring-2 ring-white"
-                  data-tooltip-id="userTooltip"
-                  data-tooltip-place="bottom"
-                />
-              </div>
+              <img
+                src={user.photoURL || "https://via.placeholder.com/40"}
+                alt="avatar"
+                className="w-10 h-10 rounded-full cursor-pointer ring-2 ring-white"
+                data-tooltip-id="userTooltip"
+              />
               <Tooltip
                 id="userTooltip"
                 clickable
@@ -106,20 +106,20 @@ const Navbar = () => {
             <>
               <NavLink
                 to="/login"
-                className="px-3 py-1 text-sm lg:px-5 lg:py-2 rounded-full font-semibold bg-blue-300 text-white shadow hover:scale-105 transition"
+                className="px-4 py-2 rounded-full font-semibold bg-blue-300 text-white shadow hover:scale-105 transition"
               >
                 Login
               </NavLink>
               <NavLink
                 to="/register"
-                className="px-3 py-1 text-sm lg:px-5 lg:py-2 rounded-full font-semibold bg-white text-green-700 border-2 border-green-700 hover:bg-green-700 hover:text-white hover:scale-105 transition"
+                className="px-4 py-2 rounded-full font-semibold bg-white text-green-700 border-2 border-green-700 hover:bg-green-700 hover:text-white hover:scale-105 transition"
               >
                 Register
               </NavLink>
             </>
           )}
 
-          
+          {/* Mobile Menu Toggle */}
           <div className="lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -141,7 +141,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      
+      {/* Mobile Menu */}
       {isMenuOpen && (
         <ul className="lg:hidden bg-gradient-to-r from-lime-300 via-green-400 to-emerald-500 text-white px-6 py-4 space-y-4 font-semibold">
           {links}
