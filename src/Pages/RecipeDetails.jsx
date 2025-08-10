@@ -14,6 +14,8 @@ const RecipeDetails = () => {
     foodName,
     foodImage,
     quantity,
+    
+      notes,
     location,
     expireDate,
     donorName,
@@ -81,7 +83,7 @@ const RecipeDetails = () => {
         <p className="text-gray-600 mb-2"><strong>Quantity:</strong> {quantity}</p>
         <p className="text-gray-600 mb-2"><strong>Pickup Location:</strong> {location}</p>
         <p className="text-gray-600 mb-2"><strong>Expires On:</strong> {new Date(expireDate).toLocaleString()}</p>
-
+         <p className="text-gray-600 mb-2"><strong>Additional Notes:</strong> {notes}</p>
         <div className="mt-6 text-right">
           <button
             onClick={() => setShowModal(true)}
