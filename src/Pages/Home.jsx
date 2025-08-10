@@ -5,6 +5,7 @@ import BannerSlider from '../Components/BannerSlider';
 import ExtraSections from '../Components/ExtraSections';
 import { Link } from 'react-router';
 import { motion } from 'framer-motion';
+import ReviewsSection from '../Components/ReviewsSection';
 
 // Framer Motion variants for animation
 const headingVariants = {
@@ -48,11 +49,11 @@ const Home = () => {
   return (
   <>
     <title>Home</title>
-    {/* Full background color matching navbar */}
+   
     <div className="bg-gradient-to-r from-lime-50 via-green-50 to-emerald-50 min-h-screen">
       <div className="container mx-auto px-4 py-6">
 
-        {/* Slide in Banner */}
+       
         <motion.div
           initial={{ x: '-100vw' }}
           animate={{ x: 0 }}
@@ -61,7 +62,7 @@ const Home = () => {
           <BannerSlider />
         </motion.div>
 
-        {/* Animated Heading */}
+       
         <motion.h1
           className="text-4xl font-bold mb-10 text-center text-green-800"
           variants={headingVariants}
@@ -71,7 +72,7 @@ const Home = () => {
           ✨ Top Recipes of the Week ✨
         </motion.h1>
 
-        {/* Recipe Grid */}
+       
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
           variants={containerVariants}
@@ -102,8 +103,10 @@ const Home = () => {
           </Link>
         </motion.div>
 
-        {/* Extra Sections */}
+        
         <ExtraSections />
+
+         <ReviewsSection></ReviewsSection>
       </div>
     </div>
   </>
