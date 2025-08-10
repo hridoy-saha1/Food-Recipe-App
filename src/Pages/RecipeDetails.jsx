@@ -14,15 +14,25 @@ const RecipeDetails = () => {
     foodName,
     foodImage,
     quantity,
-    
-      notes,
+    notes,
     location,
     expireDate,
     donorName,
-    donorEmail
+    donorEmail,
   } = recipe;
 
   const handleRequest = async () => {
+    if (!user) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Not Logged In',
+        text: 'Please log in first to request food.',
+        timer: 3000,
+        timerProgressBar: true,
+      });
+      return;
+    }
+
     const token = localStorage.getItem('token'); // ✅ JWT
 
     const requestData = {
@@ -31,7 +41,7 @@ const RecipeDetails = () => {
       foodImage,
       donorEmail,
       donorName,
-      userEmail: user?.email,
+      userEmail: user.email,
       requestDate: new Date(),
       location,
       expireDate,
@@ -80,13 +90,33 @@ const RecipeDetails = () => {
         />
         <h2 className="text-3xl font-bold text-emerald-600 mb-4">{foodName}</h2>
 
-        <p className="text-gray-600 mb-2"><strong>Quantity:</strong> {quantity}</p>
-        <p className="text-gray-600 mb-2"><strong>Pickup Location:</strong> {location}</p>
-        <p className="text-gray-600 mb-2"><strong>Expires On:</strong> {new Date(expireDate).toLocaleString()}</p>
-         <p className="text-gray-600 mb-2"><strong>Additional Notes:</strong> {notes}</p>
+        <p className="text-gray-600 mb-2">
+          <strong>Quantity:</strong> {quantity}
+        </p>
+        <p className="text-gray-600 mb-2">
+          <strong>Pickup Location:</strong> {location}
+        </p>
+        <p className="text-gray-600 mb-2">
+          <strong>Expires On:</strong> {new Date(expireDate).toLocaleString()}
+        </p>
+        <p className="text-gray-600 mb-2">
+          <strong>Additional Notes:</strong> {notes}
+        </p>
         <div className="mt-6 text-right">
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => {
+              if (!user) {
+                Swal.fire({
+                  icon: 'warning',
+                  title: 'Not Logged In',
+                  text: 'Please log in first to request food.',
+                  timer: 3000,
+                  timerProgressBar: true,
+                });
+              } else {
+                setShowModal(true);
+              }
+            }}
             className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
           >
             📨 Request This Food
