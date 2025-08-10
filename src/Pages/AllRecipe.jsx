@@ -6,7 +6,7 @@ const AllRecipe = () => {
   const allRecipes = useLoaderData();
 
   const [sortOrder, setSortOrder] = useState('asc');
-  const [isTwoColumn, setIsTwoColumn] = useState(false);
+  const [layout, setLayout] = useState('three'); // 'two', 'three', or 'five'
   const [searchText, setSearchText] = useState('');
 
   // Filter + sort recipes
@@ -21,6 +21,20 @@ const AllRecipe = () => {
       return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
     });
 
+  // Generate grid classes based on layout
+  const getGridCols = () => {
+    switch (layout) {
+      case 'two':
+        return 'grid-cols-1 sm:grid-cols-2';
+      case 'three':
+        return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
+      case 'five':
+        return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5';
+      default:
+        return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
+    }
+  };
+
   return (
     <>
       <title>All Recipe</title>
@@ -29,9 +43,7 @@ const AllRecipe = () => {
           🍽️ All Available Food
         </h2>
 
-       
         <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-         
           <input
             type="text"
             placeholder="Search by food name..."
@@ -40,7 +52,6 @@ const AllRecipe = () => {
             className="border border-gray-300 px-4 py-2 rounded w-full md:w-1/3"
           />
 
-          
           <div className="flex items-center gap-2">
             <label className="font-semibold">Sort by Expire Date:</label>
             <select
@@ -53,23 +64,21 @@ const AllRecipe = () => {
             </select>
           </div>
 
-          
-          <button
-            onClick={() => setIsTwoColumn(prev => !prev)}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-          >
-            {isTwoColumn ? '🔳 3 Column Layout' : '🔲 2 Column Layout'}
-          </button>
+          <div className="flex items-center gap-2">
+            <label className="font-semibold">Layout:</label>
+            <select
+              value={layout}
+              onChange={(e) => setLayout(e.target.value)}
+              className="border border-gray-300 rounded px-3 py-1"
+            >
+              <option value="two">2 Column</option>
+              <option value="three">3 Column</option>
+              <option value="five">5 Column</option>
+            </select>
+          </div>
         </div>
 
-      
-        <div
-          className={`grid gap-6 ${
-            isTwoColumn
-              ? 'grid-cols-1 sm:grid-cols-2'
-              : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-          }`}
-        >
+        <div className={`grid gap-6 ${getGridCols()}`}>
           {availableRecipes.length > 0 ? (
             availableRecipes.map((recipe) => (
               <AllCard key={recipe._id} recipe={recipe} />
