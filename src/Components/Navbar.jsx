@@ -113,12 +113,7 @@ const Navbar = () => {
               >
                 Login
               </NavLink>
-              <NavLink
-                to="/register"
-                className="px-4 py-2 rounded-full font-semibold bg-white text-green-700 border-2 border-green-700 hover:bg-green-700 hover:text-white hover:scale-105 transition"
-              >
-                Register
-              </NavLink>
+             
             </>
           )}
 
@@ -158,14 +153,7 @@ const Navbar = () => {
                   Login
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to="/register"
-                  className="block px-4 py-2 bg-white text-green-700 rounded hover:bg-lime-200 transition font-semibold"
-                >
-                  Register
-                </NavLink>
-              </li>
+              
             </>
           )}
         </ul>
