@@ -22,13 +22,21 @@ const Navbar = () => {
   // Mobile menu state
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Scroll state
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const handleLogout = () => {
-    logOut().then(() => {
-      console.log("Logged out");
-    });
+    logOut().then(() => console.log("Logged out"));
   };
 
-  // Navbar links based on login status
+  // Navbar links
   const links = (
     <>
       <li>
@@ -58,9 +66,15 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-gradient-to-r from-lime-300 via-green-400 to-emerald-500 shadow-lg px-6 py-4 text-white sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-
+    <nav
+      className="px-4 py-4 text-white sticky top-0 z-50 shadow-lg transition-colors duration-300"
+      style={{
+        backgroundColor: scrolled
+          ? "rgba(203,197,187)" // change color on scroll
+          : "rgba(34,20,20,1)",   // default color
+      }}
+    >
+      <div className="max-w-[1470px] mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-3 font-extrabold text-xl tracking-wide">
           <img src={photo} alt="logo" className="w-10 h-10 rounded-full" />
@@ -106,15 +120,12 @@ const Navbar = () => {
               </Tooltip>
             </div>
           ) : (
-            <>
-              <NavLink
-                to="/login"
-                className="px-4 py-2 rounded-full font-semibold bg-blue-300 text-white shadow hover:scale-105 transition"
-              >
-                Login
-              </NavLink>
-             
-            </>
+            <NavLink
+              to="/login"
+              className="px-4 py-2 rounded-full font-semibold bg-blue-300 text-white shadow hover:scale-105 transition"
+            >
+              Login
+            </NavLink>
           )}
 
           {/* Mobile Menu Toggle */}
@@ -141,20 +152,23 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <ul className="lg:hidden bg-gradient-to-r from-lime-300 via-green-400 to-emerald-500 text-white px-6 py-4 space-y-4 font-semibold">
+        <ul className="lg:hidden text-white px-6 py-4 space-y-4 font-semibold"
+            style={{
+              backgroundColor: scrolled
+                ? "rgba(100,50,50,0.9)"
+                : "rgba(34,20,20,1)"
+            }}
+        >
           {links}
           {!user && (
-            <>
-              <li>
-                <NavLink
-                  to="/login"
-                  className="block px-4 py-2 border border-white rounded hover:bg-white hover:text-green-700 transition font-semibold"
-                >
-                  Login
-                </NavLink>
-              </li>
-              
-            </>
+            <li>
+              <NavLink
+                to="/login"
+                className="block px-4 py-2 border border-white rounded hover:bg-white hover:text-green-700 transition font-semibold"
+              >
+                Login
+              </NavLink>
+            </li>
           )}
         </ul>
       )}

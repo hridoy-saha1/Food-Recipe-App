@@ -6,6 +6,7 @@ import ExtraSections from '../Components/ExtraSections';
 import { Link } from 'react-router';
 import { motion } from 'framer-motion';
 import ReviewsSection from '../Components/ReviewsSection';
+import NewArrivals from '../Components/NewArrivals';
 
 
 // Framer Motion variants for animation
@@ -51,17 +52,19 @@ const Home = () => {
     <>
       <title>Home</title>
 
-      <div className="bg-gradient-to-r from-lime-50 via-green-50 to-emerald-50 min-h-screen">
-        <div className="container mx-auto px-4 py-6">
-
-
-          <motion.div
+       <motion.div
             initial={{ x: '-100vw' }}
             animate={{ x: 0 }}
             transition={{ type: 'spring', stiffness: 70, duration: 0.8 }}
           >
             <BannerSlider />
           </motion.div>
+
+      <div className="bg-[#a19a9a] min-h-screen">
+        <div className="container mx-auto px-4 py-6">
+
+
+         
 
 
           <motion.h1
@@ -93,7 +96,7 @@ const Home = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Link to="/allRecipe">
+            <Link to="/availableFood">
               <motion.button
                 className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded-lg shadow-lg"
                 whileHover={{ boxShadow: '0px 8px 24px rgba(0,0,0,0.2)' }}
@@ -103,6 +106,8 @@ const Home = () => {
               </motion.button>
             </Link>
           </motion.div>
+
+          <NewArrivals></NewArrivals>
 
 
           <ExtraSections />

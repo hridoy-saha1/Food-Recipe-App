@@ -26,7 +26,7 @@ const reviews = [
 
 const ReviewsSection = () => {
   return (
-    <section className="py-12 bg-gradient-to-r from-lime-50 via-green-50 to-emerald-50">
+    <section className="py-12 ">
       <div className="max-w-7xl mx-auto px-4">
         
         {/* Heading */}

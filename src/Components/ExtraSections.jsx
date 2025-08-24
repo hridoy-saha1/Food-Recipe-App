@@ -70,40 +70,9 @@ const ExtraSections = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 mt-24 space-y-24">
       {/* 💡 Cooking Tips Section */}
-      <section className="text-center">
-        <motion.h2
-          className="text-3xl font-extrabold text-gray-800 mb-10"
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          💡 Quick Cooking Tips
-        </motion.h2>
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {cookingTips.map((tip, index) => (
-            <motion.div
-              key={index}
-              className="bg-gradient-to-br from-white to-emerald-50 p-6 rounded-2xl shadow-md text-left border cursor-pointer"
-              variants={cardVariants}
-              whileHover={hoverEffect}
-            >
-              <h3 className="text-xl font-semibold mb-2 text-emerald-700">
-                {tip.title}
-              </h3>
-              <p className="text-gray-600">{tip.tip}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </section>
 
-      {/* 🍽️ Popular Cuisines Section */}
-      <section>
+       <section>
         <motion.h2
           className="text-3xl font-extrabold text-center text-gray-800 mb-10"
           initial={{ opacity: 0, y: -30 }}
@@ -140,6 +109,40 @@ const ExtraSections = () => {
           ))}
         </motion.div>
       </section>
+      <section className="text-center">
+        <motion.h2
+          className="text-3xl font-extrabold text-gray-800 mb-10"
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          💡 Quick Cooking Tips
+        </motion.h2>
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {cookingTips.map((tip, index) => (
+            <motion.div
+              key={index}
+              className="bg-gradient-to-br from-white to-emerald-50 p-6 rounded-2xl shadow-md text-left border cursor-pointer"
+              variants={cardVariants}
+              whileHover={hoverEffect}
+            >
+              <h3 className="text-xl font-semibold mb-2 text-emerald-700">
+                {tip.title}
+              </h3>
+              <p className="text-gray-600">{tip.tip}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* 🍽️ Popular Cuisines Section */}
+     
     </div>
   );
 };

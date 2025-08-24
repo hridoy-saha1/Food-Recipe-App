@@ -1,57 +1,50 @@
-
 import React from "react";
-import Slider from "react-slick";
+import banner from "../assets/photo/banner.jpg";
+import { Link } from "react-router";
 
-const BannerSlider = () => {
-  const banners = [
-    {
-      id: 1,
-      title: "Delicious Bangladeshi Food",
-      image: "https://i.ibb.co/h1sC4TFN/img81389-whqc-660x440q80.jpg",
-    },
-    {
-      id: 2,
-      title: "Taste Italian Classics",
-      image: "https://i.ibb.co/DfqmKfgh/FAW-recipes-pasta-sausage-basil-and-mustard-hero-06-cfd1c0a2989e474ea7e574a38182bbee.jpg",
-    },
-    {
-      id: 3,
-      title: "Hot & Cheesy Pizzas",
-      image: "https://i.ibb.co/C39mSgqb/istockphoto-519526540-612x612.jpg",
-    },
-  ];
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 600,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 1000,
-    arrows: false,
-  };
-
+const Banner = () => {
   return (
-    <div className="mb-8 rounded-xl overflow-hidden shadow-md">
-      <Slider {...settings}>
-        {banners.map((banner) => (
-          <div key={banner.id}>
-            <div className="relative">
-              <img
-                src={banner.image}
-                alt={banner.title}
-                className="w-full h-[300px] md:h-[400px] object-cover"
-              />
-              <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-2xl md:text-4xl font-bold">
-                {banner.title}
-              </div>
-            </div>
-          </div>
-        ))}
-      </Slider>
+    <div
+      className="relative text-white "
+      style={{
+        backgroundImage: `url(${banner})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/50"></div>
+
+      {/* Content */}
+      <div className="relative max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center justify-between">
+
+        {/* Left Content */}
+        <div className="md:w-1/2  space-y-6">
+          <p className="text-lg font-medium tracking-wide">
+            Best Choice For Restaurant, Cafe and More..
+          </p>
+          <h1 className="text-4xl md:text-6xl  font-extrabold leading-tight">
+            Let’s Get Dirty!
+          </h1>
+         
+          <p className="text-gray-200 mb-11">
+            Our friendly team experts have had the experience and knowledge to
+            grow and building our collection of featured and all available
+            menus.
+          </p>
+         <Link to="/availableFood">
+          <button className="border border-red-700 text-red-700 px-6 py-3 rounded-full font-semibold bg-white hover:bg-red-700 hover:text-white transition">
+            Explore Now
+          </button>
+         </Link>
+
+        </div>
+
+        {/* Right Image */}
+
+      </div>
     </div>
   );
 };
 
-export default BannerSlider;
+export default Banner;

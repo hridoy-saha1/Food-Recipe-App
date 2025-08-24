@@ -6,34 +6,20 @@ const AllRecipe = () => {
   const allRecipes = useLoaderData();
 
   const [sortOrder, setSortOrder] = useState('asc');
-  const [layout, setLayout] = useState('three'); // 'two', 'three', or 'five'
   const [searchText, setSearchText] = useState('');
 
   // Filter + sort recipes
   const availableRecipes = allRecipes
-    .filter(recipe =>
-      recipe.status === 'available' &&
-      recipe.foodName.toLowerCase().includes(searchText.toLowerCase())
+    .filter(
+      (recipe) =>
+        recipe.status === 'available' &&
+        recipe.foodName.toLowerCase().includes(searchText.toLowerCase())
     )
     .sort((a, b) => {
       const dateA = new Date(a.expireDate);
       const dateB = new Date(b.expireDate);
       return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
     });
-
-  // Generate grid classes based on layout
-  const getGridCols = () => {
-    switch (layout) {
-      case 'two':
-        return 'grid-cols-1 sm:grid-cols-2';
-      case 'three':
-        return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
-      case 'five':
-        return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5';
-      default:
-        return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
-    }
-  };
 
   return (
     <>
@@ -63,22 +49,9 @@ const AllRecipe = () => {
               <option value="desc">Descending</option>
             </select>
           </div>
-
-          <div className="flex items-center gap-2">
-            <label className="font-semibold">Layout:</label>
-            <select
-              value={layout}
-              onChange={(e) => setLayout(e.target.value)}
-              className="border border-gray-300 rounded px-3 py-1"
-            >
-              <option value="two">2 Column</option>
-              <option value="three">3 Column</option>
-              <option value="five">5 Column</option>
-            </select>
-          </div>
         </div>
 
-        <div className={`grid gap-6 ${getGridCols()}`}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {availableRecipes.length > 0 ? (
             availableRecipes.map((recipe) => (
               <AllCard key={recipe._id} recipe={recipe} />
